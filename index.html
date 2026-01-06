@@ -2,405 +2,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Preparedness & Anticipatory Action Checklist</title>
-  <meta name="description" content="A simple checklist that remembers your progress automatically." />
-
-  <!-- Basic, readable styles -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ECHO Proposal Quality‑Assurance Checklist - Myanmar HIP 2026</title>
   <style>
-    :root {
-      --bg: #f7f7f9;
-      --panel: #ffffff;
-      --text: #1c1c1c;
-      --muted: #6b7280;
-      --brand: #2563eb;      /* blue-600 */
-      --brand-ink: #0b2c77;
-      --border: #e5e7eb;
-      --ok: #10b981;         /* emerald-500 */
-      --warn: #f59e0b;       /* amber-500 */
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      line-height: 1.5;
-    }
-    .wrap {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-    header {
-      margin: 8px 0 24px;
-      padding: 20px;
-      background: linear-gradient(135deg, #f0f5ff 0%, #ffffff 100%);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    header h1 {
-      margin: 0 0 8px;
-      font-size: 1.6rem;
-      color: var(--brand-ink);
-    }
-    header p {
-      margin: 0;
-      color: var(--muted);
-    }
-    .controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    button, .btn {
-      appearance: none;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    button.primary {
-      background: var(--brand);
-      border-color: var(--brand);
-      color: #fff;
-    }
-    button:hover {
-      filter: brightness(0.98);
-    }
-
-    .section {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      margin: 0 0 16px;
-    }
-    .section h2 {
-      margin: 0 0 12px;
-      font-size: 1.25rem;
-      color: var(--brand-ink);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section small {
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    ul.checklist {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-    }
-
-    @media (min-width: 680px) {
-      ul.checklist { grid-template-columns: 1fr 1fr; }
-    }
-
-    .item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      border: 1px dashed var(--border);
-      border-radius: 10px;
-      padding: 10px;
-      background: #fafafa;
-    }
-    .item label {
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .item p {
-      margin: 4px 0 0 0;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    .tag {
-      display: inline-block;
-      font-size: 0.78rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: var(--brand-ink);
-      border: 1px solid var(--border);
-      margin-left: 6px;
-    }
-
-    footer {
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-align: center;
-      margin: 24px 0 12px;
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
-      border: 0;
-    }
-  </style>
+body { font-family: Arial, sans-serif; margin: 2rem; color: #1f2937; }
+h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+p.intro { color: #374151; }
+section { margin-top: 1.5rem; }
+h2 { font-size: 1.2rem; margin-bottom: 0.25rem; color: #0f172a; }
+ul { list-style: none; padding-left: 0; }
+li { margin: 0.4rem 0; }
+label { line-height: 1.4; }
+.container { max-width: 900px; margin: 0 auto; }
+.toolbar { display: flex; gap: 0.5rem; margin: 1rem 0; }
+button { background: #2563eb; color: white; border: none; padding: 0.5rem 0.75rem; border-radius: 6px; cursor: pointer; }
+button.secondary { background: #6b7280; }
+.progress { background: #e5e7eb; height: 10px; border-radius: 6px; overflow: hidden; }
+.progress > div { background: #16a34a; height: 100%; width: 0; transition: width 0.2s ease; }
+.progress-text { font-size: 0.9rem; margin-top: 0.25rem; color: #374151; }
+footer { margin-top: 2rem; font-size: 0.85rem; color: #6b7280; }
+</style>
 </head>
-
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Preparedness & Anticipatory Action Checklist</h1>
-      <p>Tick items as you go—your progress is saved automatically in your browser.</p>
-      <div class="controls">
-        <button class="primary" type="button" onclick="clearChecklistState()">Reset all checks</button>
-        <button type="button" onclick="exportChecklist()">Export progress</button>
-        <button type="button" onclick="importChecklist()">Import progress</button>
-        <span class="sr-only" id="status" aria-live="polite"></span>
-      </div>
-    </header>
-
-    <!-- ===== Replace these sample sections with your own content as needed ===== -->
-
-    <section class="section" id="phase-readiness">
-      <h2>Phase 1: Readiness <span class="tag">Preparedness</span></h2>
-      <ul class="checklist">
-        <li class="item">
-          <input type="checkbox" id="readiness-risk-monitoring" />
-          <div>
-            <label for="readiness-risk-monitoring">Risk monitoring in place</label>
-            <p>Hazard thresholds and triggers defined for priority contexts.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="readiness-sop-approved" />
-          <div>
-            <label for="readiness-sop-approved">SOPs approved and socialized</label>
-            <p>Activation steps documented and shared across teams.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="readiness-financing-prearranged" />
-          <div>
-            <label for="readiness-financing-prearranged">Pre-arranged financing in place</label>
-            <p>Triggers mapped to funding sources and ceilings.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="readiness-partner-mapping" />
-          <div>
-            <label for="readiness-partner-mapping">Partner mapping completed</label>
-            <p>Operational partners confirmed for priority areas.</p>
-          </div>
-        </li>
-      </ul>
-      <small>Tip: IDs on checkboxes (like <code>readiness-risk-monitoring</code>) make saved state resilient.</small>
-    </section>
-
-    <section class="section" id="phase-activation">
-      <h2>Phase 2: Activation <span class="tag">Anticipatory Action</span></h2>
-      <ul class="checklist">
-        <li class="item">
-          <input type="checkbox" id="activation-trigger-met" />
-          <div>
-            <label for="activation-trigger-met">Trigger met & validated</label>
-            <p>Evidence documented; communications sent to stakeholders.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="activation-targeting-complete" />
-          <div>
-            <label for="activation-targeting-complete">Targeting lists finalized</label>
-            <p>Beneficiary selection criteria applied and lists verified.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="activation-cash-modality-ready" />
-          <div>
-            <label for="activation-cash-modality-ready">Cash modality ready</label>
-            <p>Delivery mechanism confirmed; KYC and compliance addressed.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="activation-m-e-plan" />
-          <div>
-            <label for="activation-m-e-plan">M&E plan initiated</label>
-            <p>Outcome indicators and timelines agreed.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <section class="section" id="phase-review">
-      <h2>Phase 3: Review & Learning <span class="tag">After Action</span></h2>
-      <ul class="checklist">
-        <li class="item">
-          <input type="checkbox" id="review-post-distribution" />
-          <div>
-            <label for="review-post-distribution">Post-distribution monitoring</label>
-            <p>Rapid PDM completed within agreed window.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="review-lessons-learned" />
-          <div>
-            <label for="review-lessons-learned">Lessons learned documented</label>
-            <p>Key insights captured; actions assigned.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="review-sop-updated" />
-          <div>
-            <label for="review-sop-updated">SOPs updated</label>
-            <p>Procedures refined based on evidence and feedback.</p>
-          </div>
-        </li>
-        <li class="item">
-          <input type="checkbox" id="review-briefing-completed" />
-          <div>
-            <label for="review-briefing-completed">Briefing to leadership</label>
-            <p>Outcomes and recommendations shared with leadership.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <footer>
-      <p>Progress is stored locally in your browser and stays after closing the page. It won’t sync across devices.</p>
-    </footer>
+  <div class="container">
+    <h1>ECHO Proposal Quality‑Assurance Checklist - Myanmar HIP 2026</h1>
+    <p class="intro">Use this checklist to quality‑assure proposals before submission to DG ECHO. It integrates rejection reasons shared and the Myanmar‑specific provisions of the 2026 HIP and Technical Annex.</p>
+    <div class="toolbar">
+      <button onclick="printChecklist()">Print</button>
+      <button class="secondary" onclick="resetChecklist()">Reset</button>
+    </div>
+    <div class="progress"><div id="progress-bar"></div></div>
+    <div id="progress-text" class="progress-text"></div>
+    <section>
+<h2>A. Needs Assessment & Evidence Base</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Is the needs assessment comprehensive, contextualized, recent, and disaggregated (quantitative and qualitative)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the analysis specific to the proposed geographic area and population groups (not generic), and does it directly justify the action?</label></li>
+<li><label><input type="checkbox" class="chk"> Are vulnerabilities and target groups evidenced with sources and dates, and aligned to the most acute needs?</label></li>
+<li><label><input type="checkbox" class="chk"> Is humanitarian advocacy grounded in coordinated, evidence‑based analysis?</label></li>
+<li><label><input type="checkbox" class="chk"> Where feasible/safe, is there consultation or coordination with relevant authorities; if not, is a clear justification provided?</label></li>
+</ul>
+</section><section>
+<h2>B. Response Analysis & Strategy</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Is there a coherent, detailed implementation strategy (methodology, sequencing, delivery mechanisms, targeting, monitoring)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the response logic fully aligned with the logical framework (results, outputs, indicators, assumptions)?</label></li>
+<li><label><input type="checkbox" class="chk"> Are operational/protection/access/contextual risks clearly analyzed with concrete mitigation measures?</label></li>
+<li><label><input type="checkbox" class="chk"> If working through community/camp management committees or local structures, are risks (e.g., exclusion, elite capture) and mitigations explicit?</label></li>
+<li><label><input type="checkbox" class="chk"> Are conflict‑sensitivity and Do No Harm considerations integrated and tracked?</label></li>
+</ul>
+</section><section>
+<h2>C. Alignment With ECHO Policies & Myanmar HIP 2026</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Does the intervention focus on life‑saving multi‑sector assistance for IDPs, conflict‑affected and disaster‑affected populations (incl. hard‑to‑reach areas)?</label></li>
+<li><label><input type="checkbox" class="chk"> Are sector choices aligned with Myanmar HIP 2026 priorities: protection (incl. mine action/IHL dissemination/GBV/CAAC/PSS), food/basic needs, health and nutrition, shelter/NFIs, WASH, emergency multi‑sector assistance, and EiE (return to learning via temporary opportunities)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is localisation a core feature (fair partnerships, capacity strengthening, risk sharing, adequate share of overheads to local partners)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is there coordination and clear complementarity with FLER/emergency mechanisms, and cluster/Area of Responsibility reporting?</label></li>
+<li><label><input type="checkbox" class="chk"> Are Minimum Environmental Requirements (MER) applied across sectors, including WASH and Shelter & Settlements designs?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the proposal free of standalone DP components in Myanmar (2026 targeted DP budget is not allocated to Myanmar) while mainstreaming preparedness where relevant?</label></li>
+<li><label><input type="checkbox" class="chk"> Does the proposal operationalise the Nexus where appropriate without diluting the life‑saving focus?</label></li>
+</ul>
+</section><section>
+<h2>D. Proposal Structure, Detail & Internal Coherence</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Is the proposal well‑structured and complete (Single Form sections fully detailed, no vague descriptions)?</label></li>
+<li><label><input type="checkbox" class="chk"> Are activities, logframe elements, and budget internally consistent across all sections?</label></li>
+<li><label><input type="checkbox" class="chk"> Are indicators SMART, time‑bound, and aligned with DG ECHO Key Result Indicators (KRIs) where applicable (avoid custom if a KRI exists)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the DG ECHO Protection Mainstreaming KOI (PMKOI) applied across sectors, and a Protection outcome indicator included for protection actions?</label></li>
+<li><label><input type="checkbox" class="chk"> Are abbreviations, methodologies, and technical concepts clearly explained?</label></li>
+</ul>
+</section><section>
+<h2>E. Results Framework Quality</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Are intended results clearly defined, realistic, and derived from the needs assessment?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the methodological approach sufficiently detailed (steps, tools, sequencing, delivery mechanisms) for each result area?</label></li>
+<li><label><input type="checkbox" class="chk"> Are activities described with enough operational detail to understand how they will be implemented?</label></li>
+<li><label><input type="checkbox" class="chk"> Is there a clear articulation of causal pathways from activities to outputs and outcomes?</label></li>
+<li><label><input type="checkbox" class="chk"> Do planned activities include tangible service delivery, not predominantly assessments/trainings/capacity building?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the balance between capacity‑building and direct assistance appropriate for a humanitarian action?</label></li>
+<li><label><input type="checkbox" class="chk"> Do the result areas logically support each other and contribute to a coherent intervention strategy (explicit linkages)?</label></li>
+<li><label><input type="checkbox" class="chk"> Are outcomes clearly stated and measurable; are indicators SMART and consistent with the logframe and narrative?</label></li>
+<li><label><input type="checkbox" class="chk"> Is there a suitable sustainability/continuity dimension (handover, local ownership) appropriate to context?</label></li>
+<li><label><input type="checkbox" class="chk"> Are activities feasible and proportionate to budget/timeframe given access and security constraints?</label></li>
+<li><label><input type="checkbox" class="chk"> If proposing systems (e.g., cash delivery), is relevance justified and are resources provided for actual implementation (not just setup)?</label></li>
+</ul>
+</section><section>
+<h2>F. Cash Assistance Standards (incl. Myanmar specifics)</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Is MPCA/cash transfer value based on local market assessments and CWG standards (with predefined triggers/SOPs for timely adjustments to preserve purchasing power)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the cash modality appropriate given market/financial service constraints, liquidity, and regulatory environment (documented risk analysis and mitigation)?</label></li>
+<li><label><input type="checkbox" class="chk"> Have delivery platforms and interoperable registries been considered to enable coordinated referrals and data sharing?</label></li>
+<li><label><input type="checkbox" class="chk"> If using cash transfer agents (last‑resort), is there justification and internal controls to mitigate diversion/sanctions risks, reported by final report?</label></li>
+<li><label><input type="checkbox" class="chk"> If establishing cash systems, is there a budget for actual transfers; if not, is the system itself a justified priority?</label></li>
+</ul>
+</section><section>
+<h2>G. Protection & Sectoral Integration (incl. WASH)</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Are protection activities inclusive and risk‑based (not only women/children unless justified by data), with comprehensive case management per standards?</label></li>
+<li><label><input type="checkbox" class="chk"> Are direct services vs referral‑based services clearly distinguished and mapped to functional pathways (with demonstrated referral mapping, not only intent)?</label></li>
+<li><label><input type="checkbox" class="chk"> If WASH is integrated within protection/health/nutrition/EiE, are causal links to specific protection and health outcomes explicit and measurable?</label></li>
+<li><label><input type="checkbox" class="chk"> Are WASH/Shelter activities compliant with MER and designed for safety, durability, and context appropriateness (incl. protracted settings and sudden onset response)?</label></li>
+</ul>
+</section><section>
+<h2>H. Risk Mitigation, Access & Partnerships</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Are partnership modalities (community committees/local NGOs) described with accountability and inclusion safeguards?</label></li>
+<li><label><input type="checkbox" class="chk"> Is a localisation annex provided (capacity strengthening, mutual benefit, transparency, equity, security management, duty of care, overheads share)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is remote management acknowledged where applicable, with DG ECHO remote management questionnaire annexed and monitoring modalities detailed?</label></li>
+<li><label><input type="checkbox" class="chk"> Are transparency procedures, inclusive selection processes, and monitoring mechanisms in place to prevent elite capture/exclusion?</label></li>
+<li><label><input type="checkbox" class="chk"> Is adaptive management planned to adjust mitigation based on evolving risks?</label></li>
+</ul>
+</section><section>
+<h2>I. Final Readiness & Submission Check</h2>
+<ul>
+<li><label><input type="checkbox" class="chk"> Does the proposal meet HIP, policy, and technical criteria and reflect a life‑saving mandate given budget constraints?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the project feasible within timeframe and budget; are resources aligned with planned activities?</label></li>
+<li><label><input type="checkbox" class="chk"> Are cross‑cutting themes addressed (protection mainstreaming, gender, age, disability inclusion, accountability, environment/MER)?</label></li>
+<li><label><input type="checkbox" class="chk"> Is the proposal competitively positioned (clear needs, logic, and priorities) for a high‑volume selection environment?</label></li>
+<li><label><input type="checkbox" class="chk"> Are all justifications evidence‑based and dated; are sources cited where relevant?</label></li>
+</ul>
+</section>
+    <footer>© 2026 – ECHO Proposal QA Checklist – Myanmar HIP 2026. Generated for internal use.</footer>
   </div>
-
-  <!-- ===== Persistence Script (auto-save + restore + import/export) ===== -->
   <script>
-    (function () {
-      // Unique storage key per page path, so different pages don't clash.
-      const STORAGE_KEY = `checklist-state::${location.pathname}`;
+function updateProgress() {
+  const checks = document.querySelectorAll('.chk');
+  const total = checks.length;
+  const done = Array.from(checks).filter(c => c.checked).length;
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = pct + '% complete';
+}
 
-      // Scope persistence to all checkboxes on the page
-      const checkboxes = Array.from(document.querySelectorAll('input[type="checkbox"]'));
+document.addEventListener('DOMContentLoaded', () => {
+  const checks = document.querySelectorAll('.chk');
+  checks.forEach(c => c.addEventListener('change', updateProgress));
+  updateProgress();
+});
 
-      // Build a stable identifier for each checkbox
-      function getCheckboxId(cb, index) {
-        if (cb.id) return cb.id;
-        if (cb.name) return `name:${cb.name}[${index}]`;
-        // Fallback: minimal DOM path
-        let path = [];
-        let el = cb;
-        while (el && el !== document.body) {
-          const tag = el.tagName.toLowerCase();
-          const idx = Array.from(el.parentNode ? el.parentNode.children : []).indexOf(el);
-          path.push(`${tag}:${idx}`);
-          el = el.parentElement;
-        }
-        return `path:${path.reverse().join('/')}`;
-      }
+function resetChecklist() {
+  document.querySelectorAll('.chk').forEach(c => c.checked = false);
+  updateProgress();
+}
 
-      function restoreState() {
-        try {
-          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-          checkboxes.forEach((cb, i) => {
-            const id = getCheckboxId(cb, i);
-            if (Object.prototype.hasOwnProperty.call(saved, id)) {
-              cb.checked = !!saved[id];
-            }
-          });
-          announce('Progress restored.');
-        } catch (e) {
-          console.warn('Checklist: restore failed', e);
-          announce('Restore failed.');
-        }
-      }
-
-      function saveState() {
-        try {
-          const state = {};
-          checkboxes.forEach((cb, i) => {
-            const id = getCheckboxId(cb, i);
-            state[id] = cb.checked;
-          });
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          // announce('Progress saved.'); // keep quiet to avoid chatter
-        } catch (e) {
-          console.warn('Checklist: save failed', e);
-          announce('Save failed.');
-        }
-      }
-
-      // Debounce save to avoid excessive writes
-      let saveTimer = null;
-      function scheduleSave() {
-        clearTimeout(saveTimer);
-        saveTimer = setTimeout(saveState, 150);
-      }
-
-      // Accessibility status updates
-      function announce(msg) {
-        const status = document.getElementById('status');
-        if (status) status.textContent = msg;
-      }
-
-      // Wire events
-      checkboxes.forEach(cb => cb.addEventListener('change', scheduleSave));
-      window.addEventListener('beforeunload', saveState);
-
-      // Public helpers
-      window.clearChecklistState = function () {
-        localStorage.removeItem(STORAGE_KEY);
-        checkboxes.forEach(cb => (cb.checked = false));
-        announce('Progress cleared.');
-      };
-
-      window.exportChecklist = function () {
-        try {
-          const data = localStorage.getItem(STORAGE_KEY) || '{}';
-          const blob = new Blob([data], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'checklist-progress.json';
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-          announce('Progress exported.');
-        } catch (e) {
-          console.warn('Checklist: export failed', e);
-          announce('Export failed.');
-        }
-      };
-
-      window.importChecklist = function () {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'application/json';
-        input.addEventListener('change', (ev) => {
-          const file = ev.target.files && ev.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = () => {
-            try {
-              const obj = JSON.parse(reader.result);
-              localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
-              restoreState();
-              announce('Progress imported.');
-            } catch (e) {
-              console.warn('Checklist: import failed', e);
-              announce('Import failed.');
-            }
-          };
-          reader.readAsText(file);
-        });
-        input.click();
-      };
-
-      // Kick off
-      restoreState();
-    })();
-  </script>
+function printChecklist() {
+  window.print();
+}
+</script>
 </body>
 </html>
