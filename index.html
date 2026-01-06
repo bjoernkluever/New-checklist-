@@ -22,7 +22,7 @@ button.secondary { background: #6b7280; }
 .progress > div { background: #16a34a; height: 100%; width: 0; transition: width 0.2s ease; }
 .progress-text { font-size: 0.9rem; margin-top: 0.25rem; color: #374151; }
 footer { margin-top: 2rem; font-size: 0.85rem; color: #6b7280; }
-</style>
+  </style>
 </head>
 <body>
   <div class="container">
@@ -149,6 +149,36 @@ function resetChecklist() {
 function printChecklist() {
   window.print();
 }
-</script>
+  </script>
+
+  <!-- Minimal checkbox persistence script: ONLY adds save/restore functionality -->
+  <script>
+(function () {
+  const STORAGE_KEY = "checkbox-state::" + location.pathname;
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+  function restore() {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    checkboxes.forEach((cb, i) => {
+      const key = cb.id || "cb-" + i;
+      if (saved[key] !== undefined) {
+        cb.checked = saved[key];
+      }
+    });
+  }
+
+  function save() {
+    const data = {};
+    checkboxes.forEach((cb, i) => {
+      const key = cb.id || "cb-" + i;
+      data[key] = cb.checked;
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener("change", save));
+  restore();
+})();
+  </script>
 </body>
 </html>
